@@ -50,7 +50,8 @@ struct game_board {
 
 int select_difficulty();
 void* create_game_board_array();
-void set_bombs();               
+void set_bombs();
+void print_board();               
 void reveal_cell_init();        //
 void reveal_cell_recur();       //
-void print_board();
+void play_game();

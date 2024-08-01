@@ -58,6 +58,8 @@ int select_difficulty() {
  * 
  * @brief will use random numbers to determine where bombs are placed on the board, up to a certain number of bombs
  * 
+ * @param game_board_data the game_board struct that will have bombs set to it by this function.
+ * 
  * @return returns nothing.  
  * 
 */
@@ -218,187 +220,263 @@ void set_bombs(struct game_board* game_board_data) {
 */
 void* create_game_board_array(enum difficulty game_difficulty) {
 
+    //declare struct that will be returned by function.
+    struct game_board* game_array = NULL;
+
+    //error handling for difficulties outside of enum.
     if (game_difficulty < 0 || game_difficulty > 3) {
         printf("Error: game difficulty out of bounds.");
-        int* nullptr = NULL;
-        return nullptr;
-
+        return game_array;
         exit(1);
     }
 
-
     switch(game_difficulty) {
         case(SIMPLE):
-
-            //initialize the game_board and populate its data members.
-            struct game_board* simple_game = (struct game_board*)malloc(sizeof(struct game_board)*1);
             
-            if (simple_game == NULL) {
+            //initialize game_array struct
+            game_array = (struct game_board*)malloc(sizeof(struct game_board)*1);
+
+            //check for malloc success
+            if (game_array == NULL) {
                 printf("Error: memory allocation failed.");
-                free(simple_game);
+                free(game_array);
                 exit(1);
             }
 
-            simple_game->rows = 5;
-            simple_game->cols = 5;
-            simple_game->number_of_bombs = 3;
-            simple_game->g_stat = MENU;
-            simple_game->board_difficulty = game_difficulty;
+            //populate data members
+            game_array->rows = 5;
+            game_array->cols = 5;
+            game_array->number_of_bombs = 3;
+            game_array->g_stat = MENU;
+            game_array->board_difficulty = game_difficulty;
 
             //allocate memory to store the game_cell array pointers
-            simple_game->board_ptr = (struct dynamic_array*)malloc(sizeof(struct dynamic_array)*simple_game->cols);
-            
-            if (simple_game->board_ptr == NULL) {
+            game_array->board_ptr = (struct dynamic_array*)malloc(sizeof(struct dynamic_array)*game_array->cols);
+
+            //check for malloc success
+            if (game_array->board_ptr == NULL) {
                 printf("Error: memory allocation failed.");
-                free(simple_game);
+                free(game_array->board_ptr);
+                free(game_array);
                 exit(1);
             }
 
             //allocate the memory for the game_cell structs, and populate its data members.
-            for(int x = 0; x < simple_game->cols; x++) {
+            for(int x = 0; x < game_array->cols; x++) {
 
-                simple_game->board_ptr[x].cells_ptr = (struct game_cell*)malloc(sizeof(struct game_cell)*simple_game->rows);
+                game_array->board_ptr[x].cells_ptr = (struct game_cell*)malloc(sizeof(struct game_cell)*game_array->rows);
                 
-                for(int y = 0; y < simple_game->rows; y++) {
+                //check for malloc success
+                if (game_array->board_ptr[x].cells_ptr == NULL) {
 
-                    simple_game->board_ptr[x].cells_ptr[y].c_stat = HIDDEN;
-                    simple_game->board_ptr[x].cells_ptr[y].display_char = ' ';
+                    printf("Error: memory allocation failed.");
+
+                    for(int x = 0; x < game_array->cols; x++) {
+                        free(game_array->board_ptr[x].cells_ptr);
+                    }
+                    free(game_array->board_ptr);
+                    free(game_array);
+                    exit(1);
+                }
+
+                for(int y = 0; y < game_array->rows; y++) {
+
+                    game_array->board_ptr[x].cells_ptr[y].c_stat = HIDDEN;
+                    game_array->board_ptr[x].cells_ptr[y].display_char = ' ';
 
                 }
 
             }
 
-            //call set_bombs, passing in the created game_board array
-            if(simple_game == NULL) {
-                printf("Error: game board array not created properly.");
-                return simple_game;
-                exit(1);
-            }
-            else{
+            //call set_bombs function to complete board setup.
+            set_bombs(game_array);
 
-                set_bombs(simple_game);
-                return simple_game;
-            }
-            
 
         case(EASY):
 
-            //initialize the game_board and populate its data members.
-            struct game_board* easy_game = (struct game_board*)malloc(sizeof(struct game_board)*1);
-            easy_game->rows = 9;
-            easy_game->cols = 9;
-            easy_game->number_of_bombs = 10;
-            easy_game->g_stat = MENU;
-            easy_game->board_difficulty = game_difficulty;
+            //initialize game_array struct
+            game_array = (struct game_board*)malloc(sizeof(struct game_board)*1);
+
+            //check for malloc success
+            if (game_array == NULL) {
+                printf("Error: memory allocation failed.");
+                free(game_array);
+                exit(1);
+            }
+
+            //populate data members
+            game_array->rows = 9;
+            game_array->cols = 9;
+            game_array->number_of_bombs = 10;
+            game_array->g_stat = MENU;
+            game_array->board_difficulty = game_difficulty;
 
             //allocate memory to store the game_cell array pointers
-            easy_game->board_ptr = (struct dynamic_array*)malloc(sizeof(struct dynamic_array)*easy_game->cols);
-            
+            game_array->board_ptr = (struct dynamic_array*)malloc(sizeof(struct dynamic_array)*game_array->cols);
+
+            //check for malloc success
+            if (game_array->board_ptr == NULL) {
+                printf("Error: memory allocation failed.");
+                free(game_array->board_ptr);
+                free(game_array);
+                exit(1);
+            }
+
             //allocate the memory for the game_cell structs, and populate its data members.
-            for(int x = 0; x < easy_game->cols; x++) {
+            for(int x = 0; x < game_array->cols; x++) {
 
-                easy_game->board_ptr[x].cells_ptr = (struct game_cell*)malloc(sizeof(struct game_cell)*easy_game->rows);
+                game_array->board_ptr[x].cells_ptr = (struct game_cell*)malloc(sizeof(struct game_cell)*game_array->rows);
                 
-                for(int y = 0; y < easy_game->rows; y++) {
+                //check for malloc success
+                if (game_array->board_ptr[x].cells_ptr == NULL) {
 
-                    easy_game->board_ptr[x].cells_ptr[y].c_stat = HIDDEN;
-                    easy_game->board_ptr[x].cells_ptr[y].display_char = ' ';
+                    printf("Error: memory allocation failed.");
+
+                    for(int x = 0; x < game_array->cols; x++) {
+                        free(game_array->board_ptr[x].cells_ptr);
+                    }
+                    free(game_array->board_ptr);
+                    free(game_array);
+                    exit(1);
+                }
+
+                for(int y = 0; y < game_array->rows; y++) {
+
+                    game_array->board_ptr[x].cells_ptr[y].c_stat = HIDDEN;
+                    game_array->board_ptr[x].cells_ptr[y].display_char = ' ';
 
                 }
 
             }
 
-            //call set_bombs, passing in the created game_board array
-            if(easy_game == NULL) {
-                printf("Error: game board array not created properly.");
-                return easy_game;
-                exit(1);
-            }
-            else{
+            //call set_bombs function to complete board setup.
+            set_bombs(game_array);
 
-                set_bombs(easy_game);
-                return easy_game;
-            }
 
         case(MEDIUM):
 
-            //initialize the game_board and populate its data members.
-            struct game_board* medium_game = (struct game_board*)malloc(sizeof(struct game_board)*1);
-            medium_game->rows = 16;
-            medium_game->cols = 16;
-            medium_game->number_of_bombs = 40;
-            medium_game->g_stat = MENU;
-            medium_game->board_difficulty = game_difficulty;
+            //initialize game_array struct
+            game_array = (struct game_board*)malloc(sizeof(struct game_board)*1);
+
+            //check for malloc success
+            if (game_array == NULL) {
+                printf("Error: memory allocation failed.");
+                free(game_array);
+                exit(1);
+            }
+
+            //populate data members
+            game_array->rows = 16;
+            game_array->cols = 16;
+            game_array->number_of_bombs = 40;
+            game_array->g_stat = MENU;
+            game_array->board_difficulty = game_difficulty;
 
             //allocate memory to store the game_cell array pointers
-            medium_game->board_ptr = (struct dynamic_array*)malloc(sizeof(struct dynamic_array)*medium_game->cols);
-            
+            game_array->board_ptr = (struct dynamic_array*)malloc(sizeof(struct dynamic_array)*game_array->cols);
+
+            //check for malloc success
+            if (game_array->board_ptr == NULL) {
+                printf("Error: memory allocation failed.");
+                free(game_array->board_ptr);
+                free(game_array);
+                exit(1);
+            }
+
             //allocate the memory for the game_cell structs, and populate its data members.
-            for(int x = 0; x < medium_game->cols; x++) {
+            for(int x = 0; x < game_array->cols; x++) {
 
-                medium_game->board_ptr[x].cells_ptr = (struct game_cell*)malloc(sizeof(struct game_cell)*medium_game->rows);
+                game_array->board_ptr[x].cells_ptr = (struct game_cell*)malloc(sizeof(struct game_cell)*game_array->rows);
                 
-                for(int y = 0; y < medium_game->rows; y++) {
+                //check for malloc success
+                if (game_array->board_ptr[x].cells_ptr == NULL) {
 
-                    medium_game->board_ptr[x].cells_ptr[y].c_stat = HIDDEN;
-                    medium_game->board_ptr[x].cells_ptr[y].display_char = ' ';
+                    printf("Error: memory allocation failed.");
+
+                    for(int x = 0; x < game_array->cols; x++) {
+                        free(game_array->board_ptr[x].cells_ptr);
+                    }
+                    free(game_array->board_ptr);
+                    free(game_array);
+                    exit(1);
+                }
+
+                for(int y = 0; y < game_array->rows; y++) {
+
+                    game_array->board_ptr[x].cells_ptr[y].c_stat = HIDDEN;
+                    game_array->board_ptr[x].cells_ptr[y].display_char = ' ';
 
                 }
 
             }
 
-            //call set_bombs, passing in the created game_board array
-            if(medium_game == NULL) {
-                printf("Error: game board array not created properly.");
-                return medium_game;
-                exit(1);
-            }
-            else{
+            //call set_bombs function to complete board setup.
+            set_bombs(game_array);
 
-                set_bombs(medium_game);
-                return medium_game;
-            }
 
         case(HARD):
 
-            //initialize the game_board and populate its data members.
-            struct game_board* hard_game = (struct game_board*)malloc(sizeof(struct game_board)*1);
-            hard_game->rows = 16;
-            hard_game->cols = 30;
-            hard_game->number_of_bombs = 99;
-            hard_game->g_stat = MENU;
-            hard_game->board_difficulty = game_difficulty;
+            //initialize game_array struct
+            game_array = (struct game_board*)malloc(sizeof(struct game_board)*1);
+
+            //check for malloc success
+            if (game_array == NULL) {
+                printf("Error: memory allocation failed.");
+                free(game_array);
+                exit(1);
+            }
+
+            //populate data members
+            game_array->rows = 16;
+            game_array->cols = 30;
+            game_array->number_of_bombs = 99;
+            game_array->g_stat = MENU;
+            game_array->board_difficulty = game_difficulty;
 
             //allocate memory to store the game_cell array pointers
-            hard_game->board_ptr = (struct dynamic_array*)malloc(sizeof(struct dynamic_array)*hard_game->cols);
-            
+            game_array->board_ptr = (struct dynamic_array*)malloc(sizeof(struct dynamic_array)*game_array->cols);
+
+            //check for malloc success
+            if (game_array->board_ptr == NULL) {
+                printf("Error: memory allocation failed.");
+                free(game_array->board_ptr);
+                free(game_array);
+                exit(1);
+            }
+
             //allocate the memory for the game_cell structs, and populate its data members.
-            for(int x = 0; x < hard_game->cols; x++) {
+            for(int x = 0; x < game_array->cols; x++) {
 
-                hard_game->board_ptr[x].cells_ptr = (struct game_cell*)malloc(sizeof(struct game_cell)*hard_game->rows);
+                game_array->board_ptr[x].cells_ptr = (struct game_cell*)malloc(sizeof(struct game_cell)*game_array->rows);
                 
-                for(int y = 0; y < hard_game->rows; y++) {
+                //check for malloc success
+                if (game_array->board_ptr[x].cells_ptr == NULL) {
 
-                    hard_game->board_ptr[x].cells_ptr[y].c_stat = HIDDEN;
-                    hard_game->board_ptr[x].cells_ptr[y].display_char = ' ';
+                    printf("Error: memory allocation failed.");
+
+                    for(int x = 0; x < game_array->cols; x++) {
+                        free(game_array->board_ptr[x].cells_ptr);
+                    }
+                    free(game_array->board_ptr);
+                    free(game_array);
+                    exit(1);
+                }
+
+                for(int y = 0; y < game_array->rows; y++) {
+
+                    game_array->board_ptr[x].cells_ptr[y].c_stat = HIDDEN;
+                    game_array->board_ptr[x].cells_ptr[y].display_char = ' ';
 
                 }
 
             }
 
-            //call set_bombs, passing in the created game_board array
-            if(hard_game == NULL) {
-                printf("Error: game board array not created properly.");
-                return hard_game;
-                exit(1);
-            }
-            else{
-
-                set_bombs(hard_game);
-                return hard_game;
-            }
+            //call set_bombs function to complete board setup.
+            set_bombs(game_array);
 
     }
+
+    return game_array;
 
 }
 
@@ -413,10 +491,9 @@ void* create_game_board_array(enum difficulty game_difficulty) {
  * 
  */
 // TOADD - param: struct game_board game_board_data
+void print_board(struct game_board* game_board_arr) {
 
-void print_board(enum difficulty game_difficulty) {
-
-    switch(game_difficulty) {
+    switch(game_board_arr->board_difficulty) {
         case(SIMPLE):
             printf("game difficulty: SIMPLE\n\n");
             printf("     0   1   2   3   4\n");
@@ -539,8 +616,31 @@ void print_board(enum difficulty game_difficulty) {
 
 }
 
+
+/**
+ * 
+ * @brief this funtion will execute the game loop, calling other functions for the game until the game state is 'won' or 'lost'.
+ * 
+ * @param game_board_arr the array that stores the data for the game that will be played.
+ * 
+ * @return returns nothing.
+ * 
+ */
+void play_game(struct game_board* game_board_arr) {
+
+    //game cycle will continue until game status is 'won'
+    while (game_board_arr->g_stat != WON) {
+
+
+
+    }
+
+}
+
+
 int main() {
 enum difficulty game_difficulty = select_difficulty();
-print_board(game_difficulty);
+struct game_board* game_board_ptr = create_game_board_array(game_difficulty);
+print_board(game_board_ptr);
 
 };
