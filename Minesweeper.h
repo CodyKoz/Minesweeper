@@ -25,6 +25,18 @@ enum game_status {
     LOST,
 };
 
+enum cell_position {
+        CENTER,
+        LEFT_EDGE,
+        RIGHT_EDGE,
+        TOP_EDGE,
+        BOTTOM_EDGE,
+        UL_CORNER,
+        UR_CORNER,
+        BL_CORNER,
+        BR_CORNER,
+    };
+
 struct game_cell {
 
     enum cell_status c_stat;
@@ -55,9 +67,9 @@ int select_difficulty();
 void* create_game_board_array();
 void set_bombs();
 void print_board();
-void reveal_cell_recur();       //
+void reveal_cell_recur();       
 void reset_visit_flags();
-void reveal_cell_init();        //
+void reveal_cell_init();        
 void reveal_bombs();
 int win_check();
 void play_game();

@@ -4,7 +4,6 @@
 #include "Minesweeper.h"
 
 //gcc -Wall Minesweeper.c -o Minesweeper
-enum difficulty;
 
 /**
  * 
@@ -58,43 +57,43 @@ int select_difficulty() {
  * 
  * @brief will use random numbers to determine where bombs are placed on the board, up to a certain number of bombs
  * 
- * @param game_board_data the game_board struct that will have bombs set to it by this function.
+ * @param game_board_arr the game_board struct that will have bombs set to it by this function.
  * 
  * @return returns nothing.  
  * 
 */
-void set_bombs(struct game_board* game_board_data) {
+void set_bombs(struct game_board* game_board_arr, int col_in, int row_in) {
 
     int bombs_set = 0;
 
-    switch(game_board_data->board_difficulty) {
+    switch(game_board_arr->board_difficulty) {
 
         case(SIMPLE):
 
             srand(time(0));
             
-            while(bombs_set != game_board_data->number_of_bombs) {
+            while(bombs_set != game_board_arr->number_of_bombs) {
 
-                for (int i = 0; i < game_board_data->cols; i++)
+                for (int i = 0; i < game_board_arr->cols; i++)
                 {
                     
-                    for (int j = 0; j < game_board_data->rows; j++)
+                    for (int j = 0; j < game_board_arr->rows; j++)
                     {
                         
                         int mod_val = rand() % 2;
 
-                        if(mod_val == 1) {
-                            game_board_data->board_ptr[i].cells_ptr[j].has_bomb = TRUE;
+                        if(mod_val == 1 && (i != col_in && j != row_in)) {
+                            game_board_arr->board_ptr[i].cells_ptr[j].has_bomb = TRUE;
                             bombs_set++;
                         }
 
-                        if(bombs_set == game_board_data->number_of_bombs) {
+                        if(bombs_set == game_board_arr->number_of_bombs) {
                             break;
                         }
 
                     }
 
-                    if(bombs_set == game_board_data->number_of_bombs) {
+                    if(bombs_set == game_board_arr->number_of_bombs) {
                             break;
                     }
 
@@ -109,28 +108,28 @@ void set_bombs(struct game_board* game_board_data) {
 
             srand(time(0));
 
-            while(bombs_set != game_board_data->number_of_bombs) {
+            while(bombs_set != game_board_arr->number_of_bombs) {
 
-                for (int i = 0; i < game_board_data->cols; i++)
+                for (int i = 0; i < game_board_arr->cols; i++)
                 {
                     
-                    for (int j = 0; j < game_board_data->rows; j++)
+                    for (int j = 0; j < game_board_arr->rows; j++)
                     {
                         
                         int mod_val = rand() % 2;
 
-                        if(mod_val == 1) {
-                            game_board_data->board_ptr[i].cells_ptr[j].has_bomb = TRUE;
+                        if(mod_val == 1 && (i != col_in && j != row_in)) {
+                            game_board_arr->board_ptr[i].cells_ptr[j].has_bomb = TRUE;
                             bombs_set++;
                         }
 
-                        if(bombs_set == game_board_data->number_of_bombs) {
+                        if(bombs_set == game_board_arr->number_of_bombs) {
                             break;
                         }
 
                     }
 
-                    if(bombs_set == game_board_data->number_of_bombs) {
+                    if(bombs_set == game_board_arr->number_of_bombs) {
                             break;
                     }
 
@@ -144,28 +143,28 @@ void set_bombs(struct game_board* game_board_data) {
 
             srand(time(0));;
 
-            while(bombs_set != game_board_data->number_of_bombs) {
+            while(bombs_set != game_board_arr->number_of_bombs) {
 
-                for (int i = 0; i < game_board_data->cols; i++)
+                for (int i = 0; i < game_board_arr->cols; i++)
                 {
                     
-                    for (int j = 0; j < game_board_data->rows; j++)
+                    for (int j = 0; j < game_board_arr->rows; j++)
                     {
                         
                         int mod_val = rand() % 2;
 
-                        if(mod_val == 1) {
-                            game_board_data->board_ptr[i].cells_ptr[j].has_bomb = TRUE;
+                        if(mod_val == 1 && (i != col_in && j != row_in)) {
+                            game_board_arr->board_ptr[i].cells_ptr[j].has_bomb = TRUE;
                             bombs_set++;
                         }
 
-                        if(bombs_set == game_board_data->number_of_bombs) {
+                        if(bombs_set == game_board_arr->number_of_bombs) {
                             break;
                         }
 
                     }
 
-                    if(bombs_set == game_board_data->number_of_bombs) {
+                    if(bombs_set == game_board_arr->number_of_bombs) {
                             break;
                     }
 
@@ -179,28 +178,28 @@ void set_bombs(struct game_board* game_board_data) {
 
             srand(time(0));
 
-            while(bombs_set != game_board_data->number_of_bombs) {
+            while(bombs_set != game_board_arr->number_of_bombs) {
 
-                for (int i = 0; i < game_board_data->cols; i++)
+                for (int i = 0; i < game_board_arr->cols; i++)
                 {
                     
-                    for (int j = 0; j < game_board_data->rows; j++)
+                    for (int j = 0; j < game_board_arr->rows; j++)
                     {
                         
                         int mod_val = rand() % 2;
 
-                        if(mod_val == 1) {
-                            game_board_data->board_ptr[i].cells_ptr[j].has_bomb = TRUE;
+                        if(mod_val == 1 && (i != col_in && j != row_in)) {
+                            game_board_arr->board_ptr[i].cells_ptr[j].has_bomb = TRUE;
                             bombs_set++;
                         }
 
-                        if(bombs_set == game_board_data->number_of_bombs) {
+                        if(bombs_set == game_board_arr->number_of_bombs) {
                             break;
                         }
 
                     }
 
-                    if(bombs_set == game_board_data->number_of_bombs) {
+                    if(bombs_set == game_board_arr->number_of_bombs) {
                             break;
                     }
 
@@ -233,7 +232,7 @@ void* create_game_board_array(enum difficulty game_difficulty) {
 
     //error handling for difficulties outside of enum.
     if (game_difficulty < 0 || game_difficulty > 3) {
-        printf("Error: game difficulty out of bounds.");
+        printf("Error: game difficulty out of bounds.\n");
         return game_array;
         exit(1);
     }
@@ -246,7 +245,7 @@ void* create_game_board_array(enum difficulty game_difficulty) {
 
             //check for malloc success
             if (game_array == NULL) {
-                printf("Error: memory allocation failed.");
+                printf("Error: memory allocation failed.\n");
                 free(game_array);
                 exit(1);
             }
@@ -263,7 +262,7 @@ void* create_game_board_array(enum difficulty game_difficulty) {
 
             //check for malloc success
             if (game_array->board_ptr == NULL) {
-                printf("Error: memory allocation failed.");
+                printf("Error: memory allocation failed.\n");
                 free(game_array->board_ptr);
                 free(game_array);
                 exit(1);
@@ -277,7 +276,7 @@ void* create_game_board_array(enum difficulty game_difficulty) {
                 //check for malloc success
                 if (game_array->board_ptr[x].cells_ptr == NULL) {
 
-                    printf("Error: memory allocation failed.");
+                    printf("Error: memory allocation failed.\n");
 
                     for(int x = 0; x < game_array->cols; x++) {
                         free(game_array->board_ptr[x].cells_ptr);
@@ -297,8 +296,6 @@ void* create_game_board_array(enum difficulty game_difficulty) {
 
             }
 
-            //call set_bombs function to complete board setup.
-            set_bombs(game_array);
             break;
 
         case(EASY):
@@ -308,7 +305,7 @@ void* create_game_board_array(enum difficulty game_difficulty) {
 
             //check for malloc success
             if (game_array == NULL) {
-                printf("Error: memory allocation failed.");
+                printf("Error: memory allocation failed.\n");
                 free(game_array);
                 exit(1);
             }
@@ -325,7 +322,7 @@ void* create_game_board_array(enum difficulty game_difficulty) {
 
             //check for malloc success
             if (game_array->board_ptr == NULL) {
-                printf("Error: memory allocation failed.");
+                printf("Error: memory allocation failed.\n");
                 free(game_array->board_ptr);
                 free(game_array);
                 exit(1);
@@ -339,7 +336,7 @@ void* create_game_board_array(enum difficulty game_difficulty) {
                 //check for malloc success
                 if (game_array->board_ptr[x].cells_ptr == NULL) {
 
-                    printf("Error: memory allocation failed.");
+                    printf("Error: memory allocation failed.\n");
 
                     for(int x = 0; x < game_array->cols; x++) {
                         free(game_array->board_ptr[x].cells_ptr);
@@ -358,8 +355,6 @@ void* create_game_board_array(enum difficulty game_difficulty) {
 
             }
 
-            //call set_bombs function to complete board setup.
-            set_bombs(game_array);
             break;
 
         case(MEDIUM):
@@ -369,7 +364,7 @@ void* create_game_board_array(enum difficulty game_difficulty) {
 
             //check for malloc success
             if (game_array == NULL) {
-                printf("Error: memory allocation failed.");
+                printf("Error: memory allocation failed.\n");
                 free(game_array);
                 exit(1);
             }
@@ -386,7 +381,7 @@ void* create_game_board_array(enum difficulty game_difficulty) {
 
             //check for malloc success
             if (game_array->board_ptr == NULL) {
-                printf("Error: memory allocation failed.");
+                printf("Error: memory allocation failed.\n");
                 free(game_array->board_ptr);
                 free(game_array);
                 exit(1);
@@ -400,7 +395,7 @@ void* create_game_board_array(enum difficulty game_difficulty) {
                 //check for malloc success
                 if (game_array->board_ptr[x].cells_ptr == NULL) {
 
-                    printf("Error: memory allocation failed.");
+                    printf("Error: memory allocation failed.\n");
 
                     for(int x = 0; x < game_array->cols; x++) {
                         free(game_array->board_ptr[x].cells_ptr);
@@ -419,8 +414,6 @@ void* create_game_board_array(enum difficulty game_difficulty) {
 
             }
 
-            //call set_bombs function to complete board setup.
-            set_bombs(game_array);
             break;
 
         case(HARD):
@@ -430,7 +423,7 @@ void* create_game_board_array(enum difficulty game_difficulty) {
 
             //check for malloc success
             if (game_array == NULL) {
-                printf("Error: memory allocation failed.");
+                printf("Error: memory allocation failed.\n");
                 free(game_array);
                 exit(1);
             }
@@ -447,7 +440,7 @@ void* create_game_board_array(enum difficulty game_difficulty) {
 
             //check for malloc success
             if (game_array->board_ptr == NULL) {
-                printf("Error: memory allocation failed.");
+                printf("Error: memory allocation failed.\n");
                 free(game_array->board_ptr);
                 free(game_array);
                 exit(1);
@@ -461,7 +454,7 @@ void* create_game_board_array(enum difficulty game_difficulty) {
                 //check for malloc success
                 if (game_array->board_ptr[x].cells_ptr == NULL) {
 
-                    printf("Error: memory allocation failed.");
+                    printf("Error: memory allocation failed.\n");
 
                     for(int x = 0; x < game_array->cols; x++) {
                         free(game_array->board_ptr[x].cells_ptr);
@@ -480,8 +473,6 @@ void* create_game_board_array(enum difficulty game_difficulty) {
 
             }
 
-            //call set_bombs function to complete board setup.
-            set_bombs(game_array);
             break;
     }
 
@@ -625,10 +616,414 @@ void print_board(struct game_board* game_board_arr) {
 
 /**
  * 
+ * @brief will recursively search out from user selected cell coordinates, revealing any cells that are not bombs, and stopping at any cells adjacent to bombs.
  * 
+ * @param game_board_arr pointer to the game board matrix.
+ * @param col_in column of selected cell coordinates.
+ * @param row_in row of selected cell coordinates.
+ * 
+ * @return returns nothing.
  * 
  */
-void reveal_cell_recur() {
+void reveal_cell_recur(struct game_board* game_board_arr, int col_in, int row_in) {
+
+    if (game_board_arr->board_ptr[col_in].cells_ptr[row_in].visited == TRUE) {
+        return;
+    }
+    else {
+
+        int adj_bombs = 0;
+        game_board_arr->board_ptr[col_in].cells_ptr[row_in].visited = TRUE;
+
+        enum cell_position c_pos;
+
+        //count how many bombs are adjacent
+        //condition checks if the selected cell is not on the edge of the board.
+        if((col_in > 0 && col_in < game_board_arr->cols - 1) && (row_in > 0 && row_in < game_board_arr->rows - 1)) {
+
+            c_pos = CENTER;
+
+            //iterate through cells surrounding selected cell, counting how many bombs are present.
+            for(int i = col_in - 1; i < col_in + 2; i++) {
+
+                for(int j = row_in - 1; j < row_in + 2; j++) {
+
+                    if(game_board_arr->board_ptr[i].cells_ptr[j].has_bomb == TRUE) {
+
+                        adj_bombs++;
+
+                    }
+
+                }
+
+            }
+
+        }
+        
+        //for cells of the edges of the board.
+        else {
+
+            //determining where the cell is located along the edge
+            
+            //cells along the left edge of the board
+            if(col_in == 0) {
+
+                //this block is for cells located in the upper-left corner of the board
+                if(row_in == 0) {
+
+                    c_pos = UL_CORNER;
+
+                    //now that cell is located, we now know which cells are adjacent and in-bounds to check for bombs
+                    if(game_board_arr->board_ptr[col_in + 1].cells_ptr[row_in].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+                    if(game_board_arr->board_ptr[col_in + 1].cells_ptr[row_in + 1].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+                    if(game_board_arr->board_ptr[col_in].cells_ptr[row_in + 1].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+
+                }
+                //this block is for cells that are in the bottom-left corner of the board
+                else if(row_in == game_board_arr->rows - 1) {
+
+                    c_pos = BL_CORNER;
+
+                    //now that cell is located, we now know which cells are adjacent and in-bounds to check for bombs
+                    if(game_board_arr->board_ptr[col_in + 1].cells_ptr[row_in].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+                    if(game_board_arr->board_ptr[col_in + 1].cells_ptr[row_in - 1].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+                    if(game_board_arr->board_ptr[col_in].cells_ptr[row_in - 1].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+
+                }
+                //this block is for cells that are along the left edge of the board, but are not in a corner.
+                else {
+
+                    c_pos = LEFT_EDGE;
+
+                    if(game_board_arr->board_ptr[col_in].cells_ptr[row_in - 1].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+                    if(game_board_arr->board_ptr[col_in + 1].cells_ptr[row_in - 1].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+                    if(game_board_arr->board_ptr[col_in + 1].cells_ptr[row_in].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+                    if(game_board_arr->board_ptr[col_in + 1].cells_ptr[row_in + 1].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+                    if(game_board_arr->board_ptr[col_in].cells_ptr[row_in + 1].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+
+                }
+
+            }
+
+            //cells located along the right edge of the board.
+            else if(col_in == game_board_arr->cols - 1) {
+
+                //cell is located in upper-right corner of the board
+                if(row_in == 0) {
+
+                    c_pos = UR_CORNER;
+
+                    if(game_board_arr->board_ptr[col_in - 1].cells_ptr[row_in].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+                    if(game_board_arr->board_ptr[col_in - 1].cells_ptr[row_in + 1].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+                    if(game_board_arr->board_ptr[col_in].cells_ptr[row_in + 1].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+
+                }
+                //cell is located in the lower-right corner of the board.
+                else if(row_in == game_board_arr->rows - 1) {
+                    
+                    c_pos = BR_CORNER;
+
+                    if(game_board_arr->board_ptr[col_in].cells_ptr[row_in - 1].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+                    if(game_board_arr->board_ptr[col_in - 1].cells_ptr[row_in - 1].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+                    if(game_board_arr->board_ptr[col_in - 1].cells_ptr[row_in].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+
+                }
+                //cell is located on the right edge but is not a corner cell.
+                else {
+
+                    c_pos = RIGHT_EDGE;
+
+                    if(game_board_arr->board_ptr[col_in].cells_ptr[row_in + 1].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+                    if(game_board_arr->board_ptr[col_in - 1].cells_ptr[row_in + 1].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+                    if(game_board_arr->board_ptr[col_in - 1].cells_ptr[row_in].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+                    if(game_board_arr->board_ptr[col_in - 1].cells_ptr[row_in - 1].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+                    if(game_board_arr->board_ptr[col_in].cells_ptr[row_in - 1].has_bomb == TRUE) {
+                        adj_bombs++;
+                    }
+
+                }
+
+            }
+
+            //cells located along the top edge of the board, excluding the corners since they are covered in the above blocks.
+            else if(row_in == 0 && (col_in != 0 && col_in != game_board_arr->cols - 1)) {
+
+                c_pos = TOP_EDGE;
+
+                if(game_board_arr->board_ptr[col_in + 1].cells_ptr[row_in].has_bomb == TRUE) {
+                    adj_bombs++;
+                }
+                if(game_board_arr->board_ptr[col_in + 1].cells_ptr[row_in + 1].has_bomb == TRUE) {
+                    adj_bombs++;
+                }
+                if(game_board_arr->board_ptr[col_in].cells_ptr[row_in + 1].has_bomb == TRUE) {
+                    adj_bombs++;
+                }
+                if(game_board_arr->board_ptr[col_in - 1].cells_ptr[row_in + 1].has_bomb == TRUE) {
+                    adj_bombs++;
+                }
+                if(game_board_arr->board_ptr[col_in - 1].cells_ptr[row_in].has_bomb == TRUE) {
+                    adj_bombs++;
+                }
+
+            }
+
+            //cells located along the bottom edge of the board, excluding the corners since they are covered in the above blocks.
+            else if(row_in == game_board_arr->rows - 1 && (col_in != 0 && col_in != game_board_arr->cols - 1)) {
+
+                c_pos = BOTTOM_EDGE;
+
+                if(game_board_arr->board_ptr[col_in - 1].cells_ptr[row_in].has_bomb == TRUE) {
+                    adj_bombs++;
+                }
+                if(game_board_arr->board_ptr[col_in - 1].cells_ptr[row_in - 1].has_bomb == TRUE) {
+                    adj_bombs++;
+                }
+                if(game_board_arr->board_ptr[col_in].cells_ptr[row_in - 1].has_bomb == TRUE) {
+                    adj_bombs++;
+                }
+                if(game_board_arr->board_ptr[col_in + 1].cells_ptr[row_in - 1].has_bomb == TRUE) {
+                    adj_bombs++;
+                }
+                if(game_board_arr->board_ptr[col_in + 1].cells_ptr[row_in].has_bomb == TRUE) {
+                    adj_bombs++;
+                }
+
+            }
+
+        }
+
+        //if no bombs are adjacent, recursively call this function on adjacent cells
+        if(adj_bombs == 0) {
+
+            /*changing display char to reflect that thare are no adjacent bombs to this tile, 
+            then recursively calling this function on its adjacent tiles*/
+            switch(c_pos) {
+
+                case(CENTER):
+
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat = OPEN;
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].display_char = '_';
+
+                    reveal_cell_recur(game_board_arr, col_in, row_in - 1);
+                    reveal_cell_recur(game_board_arr, col_in + 1, row_in - 1);
+                    reveal_cell_recur(game_board_arr, col_in + 1, row_in);
+                    reveal_cell_recur(game_board_arr, col_in + 1, row_in + 1);
+                    reveal_cell_recur(game_board_arr, col_in, row_in + 1);
+                    reveal_cell_recur(game_board_arr, col_in - 1, row_in + 1);
+                    reveal_cell_recur(game_board_arr, col_in - 1, row_in);
+                    reveal_cell_recur(game_board_arr, col_in - 1, row_in - 1);
+
+                    break;
+
+                case(LEFT_EDGE):
+
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat = OPEN;
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].display_char = '_';
+
+                    reveal_cell_recur(game_board_arr, col_in, row_in - 1);
+                    reveal_cell_recur(game_board_arr, col_in + 1, row_in - 1);
+                    reveal_cell_recur(game_board_arr, col_in + 1, row_in);
+                    reveal_cell_recur(game_board_arr, col_in + 1, row_in + 1);
+                    reveal_cell_recur(game_board_arr, col_in, row_in + 1);
+
+                    break;
+
+                case(RIGHT_EDGE):
+
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat = OPEN;
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].display_char = '_';
+
+                    reveal_cell_recur(game_board_arr, col_in, row_in + 1);
+                    reveal_cell_recur(game_board_arr, col_in - 1, row_in + 1);
+                    reveal_cell_recur(game_board_arr, col_in - 1, row_in);
+                    reveal_cell_recur(game_board_arr, col_in - 1, row_in - 1);
+                    reveal_cell_recur(game_board_arr, col_in, row_in - 1);
+
+                    break;
+
+                case(TOP_EDGE):
+
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat = OPEN;
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].display_char = '_';
+
+                    reveal_cell_recur(game_board_arr, col_in + 1, row_in);
+                    reveal_cell_recur(game_board_arr, col_in + 1, row_in + 1);
+                    reveal_cell_recur(game_board_arr, col_in, row_in + 1);
+                    reveal_cell_recur(game_board_arr, col_in - 1, row_in + 1);
+                    reveal_cell_recur(game_board_arr, col_in - 1, row_in);
+
+                    break;
+
+                case(BOTTOM_EDGE):
+
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat = OPEN;
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].display_char = '_';
+
+                    reveal_cell_recur(game_board_arr, col_in - 1, row_in);
+                    reveal_cell_recur(game_board_arr, col_in - 1, row_in - 1);
+                    reveal_cell_recur(game_board_arr, col_in, row_in - 1);
+                    reveal_cell_recur(game_board_arr, col_in + 1, row_in - 1);
+                    reveal_cell_recur(game_board_arr, col_in + 1, row_in);
+
+                    break;
+
+                case(UL_CORNER):
+
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat = OPEN;
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].display_char = '_';
+
+                    reveal_cell_recur(game_board_arr, col_in + 1, row_in);
+                    reveal_cell_recur(game_board_arr, col_in + 1, row_in + 1);
+                    reveal_cell_recur(game_board_arr, col_in, row_in + 1);
+
+                    break;
+
+                case(UR_CORNER):
+
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat = OPEN;
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].display_char = '_';
+
+                    reveal_cell_recur(game_board_arr, col_in - 1, row_in);
+                    reveal_cell_recur(game_board_arr, col_in - 1, row_in + 1);
+                    reveal_cell_recur(game_board_arr, col_in, row_in + 1);
+
+                    break;
+
+                case(BL_CORNER):
+
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat = OPEN;
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].display_char = '_';
+
+                    reveal_cell_recur(game_board_arr, col_in, row_in - 1);
+                    reveal_cell_recur(game_board_arr, col_in + 1, row_in - 1);
+                    reveal_cell_recur(game_board_arr, col_in + 1, row_in);
+
+                    break;
+
+                case(BR_CORNER):
+
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat = OPEN;
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].display_char = '_';
+
+                    reveal_cell_recur(game_board_arr, col_in - 1, row_in);
+                    reveal_cell_recur(game_board_arr, col_in - 1, row_in - 1);
+                    reveal_cell_recur(game_board_arr, col_in, row_in - 1);
+
+                    break;
+                
+            }
+
+        }
+        else {
+
+            //changing display char to reflect how many adjacent bombs there are to this tile
+            switch(adj_bombs) {
+
+                case(1):
+
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat = OPEN;
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].display_char = '1';
+
+                    break;
+
+                case(2):
+
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat = OPEN;
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].display_char = '2';
+
+                    break;
+
+                case(3):
+
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat = OPEN;
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].display_char = '3';
+
+                    break;
+
+                case(4):
+
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat = OPEN;
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].display_char = '4';
+
+                    break;
+
+                case(5):
+
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat = OPEN;
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].display_char = '5';
+
+                    break;
+
+                case(6):
+
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat = OPEN;
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].display_char = '6';
+
+                    break;
+
+                case(7):
+
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat = OPEN;
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].display_char = '7';
+
+                    break;
+
+                case(8):
+
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat = OPEN;
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].display_char = '8';
+
+                    break;
+
+            }
+
+            
+
+        }
+    }
 
 }
 
@@ -664,8 +1059,22 @@ void reset_visit_flags(struct game_board* game_board_arr) {
  * @param row_in row of selected cell coordinates.
  * 
  */
-void reveal_cell_init(struct game_board* game_board_arr, int col_in, int row_in) {
+void reveal_cell_init(struct game_board* game_board_arr, int col_in, int row_in, int reveal_cell_actions) {
+    
+    //ensures that the first cell that is revealed will always be safe by only setting the bombs after the first cell is revealed
+    if(reveal_cell_actions == 1) {
 
+        set_bombs(game_board_arr, col_in, row_in);
+        reveal_cell_recur(game_board_arr, col_in, row_in);
+        reset_visit_flags(game_board_arr);
+
+    }
+    else {
+
+        reveal_cell_recur(game_board_arr, col_in, row_in);
+        reset_visit_flags(game_board_arr);
+
+    }
 }
 
 
@@ -697,14 +1106,22 @@ void reveal_bombs(struct game_board* game_board_arr) {
  * 
  * @brief will determine if game has been won by checking if every cell that does not have a bomb is revealed
  * 
+ * @param game_board_arr pointer to the game board matrix.
  * 
+ * @return returns an integer. 1 indicates that the player has won the game, and 0 indicates that the player has not yet won.
  * 
  */
 int win_check(struct game_board* game_board_arr) {
 
-    int open_cell_count;
+    int open_cell_count = 0;
 
     switch(game_board_arr->board_difficulty) {
+
+        default:
+
+            //handling unexpected difficulty levels
+            return -1;
+
 
         case(SIMPLE):
 
@@ -712,7 +1129,7 @@ int win_check(struct game_board* game_board_arr) {
 
                 for (int j = 0; j < game_board_arr->cols; j++) {
 
-                    if(game_board_arr->board_ptr[i].cells_ptr[j].has_bomb = FALSE && game_board_arr->board_ptr[i].cells_ptr[j].c_stat == OPEN) {
+                    if(game_board_arr->board_ptr[i].cells_ptr[j].has_bomb == FALSE && game_board_arr->board_ptr[i].cells_ptr[j].c_stat == OPEN) {
 
                         open_cell_count++;
                         
@@ -731,20 +1148,118 @@ int win_check(struct game_board* game_board_arr) {
                 }
 
                 if(game_board_arr->g_stat == WON) {
+                    return 1;
                     break;
                 }
 
-            }   
+            }  
 
+            return 0; 
             break;
+
 
         case(EASY):
+            
+            for (int i = 0; i < game_board_arr->cols; i++) {
+
+                for (int j = 0; j < game_board_arr->cols; j++) {
+
+                    if(game_board_arr->board_ptr[i].cells_ptr[j].has_bomb == FALSE && game_board_arr->board_ptr[i].cells_ptr[j].c_stat == OPEN) {
+
+                        open_cell_count++;
+                        
+                    }
+
+                    //checking if number of open cells matches the number of cells on the board minus the number of bombs
+                    if(open_cell_count == 81 - game_board_arr->number_of_bombs) {
+                        game_board_arr->g_stat = WON;
+                        break;
+                    }
+
+                    if(game_board_arr->g_stat == WON) {
+                        break;
+                    }
+
+                }
+
+                if(game_board_arr->g_stat == WON) {
+                    return 1;
+                    break;
+                }
+
+            }  
+
+            return 0; 
             break;
+
 
         case(MEDIUM):
+
+            for (int i = 0; i < game_board_arr->cols; i++) {
+
+                for (int j = 0; j < game_board_arr->cols; j++) {
+
+                    if(game_board_arr->board_ptr[i].cells_ptr[j].has_bomb == FALSE && game_board_arr->board_ptr[i].cells_ptr[j].c_stat == OPEN) {
+
+                        open_cell_count++;
+                        
+                    }
+
+                    //checking if number of open cells matches the number of cells on the board minus the number of bombs
+                    if(open_cell_count == 256 - game_board_arr->number_of_bombs) {
+                        game_board_arr->g_stat = WON;
+                        break;
+                    }
+
+                    if(game_board_arr->g_stat == WON) {
+                        break;
+                    }
+
+                }
+
+                if(game_board_arr->g_stat == WON) {
+                    return 1;
+                    break;
+                }
+
+            }  
+
+            return 0; 
             break;
 
+
         case(HARD):
+
+            for (int i = 0; i < game_board_arr->cols; i++) {
+
+                for (int j = 0; j < game_board_arr->cols; j++) {
+
+                    if(game_board_arr->board_ptr[i].cells_ptr[j].has_bomb == FALSE && game_board_arr->board_ptr[i].cells_ptr[j].c_stat == OPEN) {
+
+                        open_cell_count++;
+                        
+                    }
+
+                    //checking if number of open cells matches the number of cells on the board minus the number of bombs
+                    if(open_cell_count == 480 - game_board_arr->number_of_bombs) {
+                        game_board_arr->g_stat = WON;
+                        break;
+                    }
+
+                    if(game_board_arr->g_stat == WON) {
+                        break;
+                    }
+
+                }
+
+                if(game_board_arr->g_stat == WON) {
+                    return 1;
+                    break;
+                }
+
+            }  
+
+            return 0; 
             break;
 
     }
@@ -762,7 +1277,9 @@ int win_check(struct game_board* game_board_arr) {
  */
 void play_game(struct game_board* game_board_arr) {
 
+    //is currently for testing purposes. but could be used as a kind of "score" along with the time taken to complete a game.
     int round_count = 1;
+    int reveal_cell_actions = 0;
 
     int col_in;
     int row_in;
@@ -770,8 +1287,8 @@ void play_game(struct game_board* game_board_arr) {
 
     game_board_arr->g_stat = PLAYING;
 
-    //game cycle will continue until game status is 'won'
-    while (game_board_arr->g_stat == PLAYING || round_count < 5) {
+    //game cycle will continue until game status is changed from 'playing'
+    while (game_board_arr->g_stat == PLAYING) {
 
         //take user input (coordinates, and a command char)
         printf("\n\nInput cell coordinates (column, then row), and a command for the cell. Example: '3,2,R' \n");
@@ -780,22 +1297,31 @@ void play_game(struct game_board* game_board_arr) {
         scanf("%d,%d,%c", &col_in, &row_in, &command_in);
 
         //error handling for user input
-        if(command_in != 'f' || command_in != 'F' || command_in != 'r' || command_in != 'R') {
-            printf("Input command invalid. please try again.");
+        if(col_in < 0 || col_in > game_board_arr->cols || row_in < 0 || row_in > game_board_arr->rows) {
+            printf("Input coordinates out of bounds. please try again.\n");
             break;
         }
-        else if(col_in < 0 || col_in > game_board_arr->cols || row_in < 0 || row_in > game_board_arr->rows) {
-            printf("Input coordinates out of bounds. please try again.");
-            break;
-        }
-        else {
-
+        else if(command_in == 'f' || command_in == 'F' || command_in == 'r' || command_in == 'R') {
+            
             //handling flagging cells
             if(command_in == 'F' || command_in == 'f') {
 
-                game_board_arr->board_ptr[col_in].cells_ptr[row_in].display_char = '!';
-                print_board(game_board_arr);
+                if(game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat == FLAGGED) {
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat = HIDDEN;
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].display_char = ' ';
+                    print_board(game_board_arr);
+                }
+                else if(game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat == OPEN) {
 
+                    //do nothing, since you cant flag an opened cell
+
+                }
+                else {
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].c_stat = FLAGGED;
+                    game_board_arr->board_ptr[col_in].cells_ptr[row_in].display_char = '!';
+                    print_board(game_board_arr);
+                }
+            
             }
             //handling revealing a cell with a bomb
             else if(game_board_arr->board_ptr[col_in].cells_ptr[row_in].has_bomb == TRUE) {
@@ -805,22 +1331,48 @@ void play_game(struct game_board* game_board_arr) {
                 reveal_bombs(game_board_arr);
                 print_board(game_board_arr);
 
+                //print something to the terminal to indicate that the player has lost
+                printf("\n\n================================================================================================================\n");
+                printf("                                                      GAME OVER                                                 \n");
+                printf("================================================================================================================\n\n");
+                return;
+
             }
             //handling revealing a cell with no bomb
             else {
+                
+                reveal_cell_actions = 1 + reveal_cell_actions;
 
-                 
+                reveal_cell_init(game_board_arr, col_in, row_in, reveal_cell_actions);
+                print_board(game_board_arr);
 
             }
 
+            //call win_check somewhere around here
+
+            int has_won = win_check(game_board_arr);
+            if(has_won == 1) {
+                //player has won the game
+                //print something to the terminal here to indicate this to the player
+                printf("\n\n================================================================================================================\n");
+                printf("                                                      YOU WIN!                                                  \n");
+                printf("================================================================================================================\n\n");
+
+                printf("you completed the game in %d rounds!", round_count);
+
+
+                return;
+            }
+            else {
+                //player has not won, and will continue playing
+                round_count++;
+            }
+        }
+        else {
+
+            printf("Input command invalid. please try again.\n");
 
         }
-
-        
-
-
-
-        round_count++;
 
     }
 
@@ -828,10 +1380,42 @@ void play_game(struct game_board* game_board_arr) {
 
 
 int main() {
-enum difficulty game_difficulty = select_difficulty();
-struct game_board* game_board_ptr = create_game_board_array(game_difficulty);
-print_board(game_board_ptr);
 
-play_game(game_board_ptr);
+    int keep_playing = 1;
+
+    while(keep_playing == 1) {
+
+        enum difficulty game_difficulty = select_difficulty();
+        struct game_board* game_board_ptr = create_game_board_array(game_difficulty);
+        print_board(game_board_ptr);
+        play_game(game_board_ptr);
+
+        int valid_response = 0;
+        while(valid_response != 1) {
+            
+            printf("\n\nplay another game? ('y' = yes, 'n' = no)\n");
+            char response = ' ';
+            scanf("%c", &response);
+            if(response == 'y' || response == 'Y') {
+                keep_playing = 1;
+                valid_response = 1;
+                break;
+            }
+            else if(response == 'n' || response == 'N') {
+                printf("Thank you for playing!\n");
+                valid_response = 1;
+                keep_playing = 0;
+                break;
+            }
+            else {
+                printf("response invalid. please try again.\n");
+            }
+
+        }
+        
+
+    }
+
+    
 
 };
