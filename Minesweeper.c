@@ -1129,7 +1129,9 @@ int win_check(struct game_board* game_board_arr) {
 
                 for (int j = 0; j < game_board_arr->cols; j++) {
 
-                    if(game_board_arr->board_ptr[i].cells_ptr[j].has_bomb == FALSE && game_board_arr->board_ptr[i].cells_ptr[j].c_stat == OPEN) {
+                    if((game_board_arr->board_ptr[i].cells_ptr[j].has_bomb == FALSE && game_board_arr->board_ptr[i].cells_ptr[j].c_stat == OPEN) ||
+                       (game_board_arr->board_ptr[i].cells_ptr[j].has_bomb == FALSE && game_board_arr->board_ptr[i].cells_ptr[j].c_stat == FLAGGED)
+                    ) {
 
                         open_cell_count++;
                         
@@ -1349,8 +1351,9 @@ void play_game(struct game_board* game_board_arr) {
             }
 
             //call win_check somewhere around here
+            int has_won = 0;
 
-            int has_won = win_check(game_board_arr);
+            has_won = win_check(game_board_arr);
             if(has_won == 1) {
                 //player has won the game
                 //print something to the terminal here to indicate this to the player
@@ -1358,9 +1361,7 @@ void play_game(struct game_board* game_board_arr) {
                 printf("                                                      YOU WIN!                                                  \n");
                 printf("================================================================================================================\n\n");
 
-                printf("you completed the game in %d rounds!", round_count);
-
-
+                printf("you completed the game in %d rounds!\n", round_count);
                 return;
             }
             else {
@@ -1393,8 +1394,8 @@ int main() {
         int valid_response = 0;
         while(valid_response != 1) {
             
-            printf("\n\nplay another game? ('y' = yes, 'n' = no)\n");
             char response = ' ';
+            printf("\n\nplay another game? ('y' = yes, 'n' = no)\n");
             scanf("%c", &response);
             if(response == 'y' || response == 'Y') {
                 keep_playing = 1;
