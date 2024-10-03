@@ -80,7 +80,7 @@ void set_bombs(struct game_board* game_board_arr, int col_in, int row_in) {
                     for (int j = 0; j < game_board_arr->rows; j++)
                     {
                         
-                        int mod_val = rand() % 2;
+                        int mod_val = rand() % 200;
 
                         if(mod_val == 1 && (i != col_in && j != row_in)) {
                             game_board_arr->board_ptr[i].cells_ptr[j].has_bomb = TRUE;
@@ -116,7 +116,7 @@ void set_bombs(struct game_board* game_board_arr, int col_in, int row_in) {
                     for (int j = 0; j < game_board_arr->rows; j++)
                     {
                         
-                        int mod_val = rand() % 2;
+                        int mod_val = rand() % 200;
 
                         if(mod_val == 1 && (i != col_in && j != row_in)) {
                             game_board_arr->board_ptr[i].cells_ptr[j].has_bomb = TRUE;
@@ -151,7 +151,7 @@ void set_bombs(struct game_board* game_board_arr, int col_in, int row_in) {
                     for (int j = 0; j < game_board_arr->rows; j++)
                     {
                         
-                        int mod_val = rand() % 2;
+                        int mod_val = rand() % 200;
 
                         if(mod_val == 1 && (i != col_in && j != row_in)) {
                             game_board_arr->board_ptr[i].cells_ptr[j].has_bomb = TRUE;
@@ -186,7 +186,7 @@ void set_bombs(struct game_board* game_board_arr, int col_in, int row_in) {
                     for (int j = 0; j < game_board_arr->rows; j++)
                     {
                         
-                        int mod_val = rand() % 2;
+                        int mod_val = rand() % 200;
 
                         if(mod_val == 1 && (i != col_in && j != row_in)) {
                             game_board_arr->board_ptr[i].cells_ptr[j].has_bomb = TRUE;
